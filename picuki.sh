@@ -13,6 +13,7 @@ media=`cat "$html" | grep -Po '<a href="https://www.picuki.com/media/\K[^"\x27]+
 echo "$media" | while read line; do
 	req_link="https://www.picuki.com/media/$line"
 	echo $req_link
+	# checking if media already exists. If it does, skip iteration.
 	if [[ -e $line-1.jpg || -e $line-1.mp4 ]]; then
 		continue
 	fi
@@ -25,14 +26,15 @@ echo "$media" | while read line; do
 			wget $img_link -O "$line-$fname.jpg" -q --show-progress
 			fname=`expr $fname + 1`
 			sleep 1
-		elif [[ -n `curl -s -i $req_link | grep -Po '<video'`  && ! -e $line-$fname.mp4 ]]; then
-			vid_part=`curl -s -i $req_link | grep -Po 'src="https://cdn2.picuki.com/hosted-by-instagram/\K[^"\x27]+'`
-			if [[ -n $vid_part ]]; then
-				vid_link="https://cdn2.picuki.com/hosted-by-instagram/$vid_part"
-				wget $vid_link -O "$line-$fname.mp4" -q --show-progress
-				fname=`expr $fname + 1`
-				sleep 1
-			fi
+# comment out the next elif section if downloading video is not required
+		# elif [[ -n `curl -s -i $req_link | grep -Po '<video'`  && ! -e $line-$fname.mp4 ]]; then
+		# 	vid_part=`curl -s -i $req_link | grep -Po 'src="https://cdn2.picuki.com/hosted-by-instagram/\K[^"\x27]+'`
+		# 	if [[ -n $vid_part ]]; then
+		# 		vid_link="https://cdn2.picuki.com/hosted-by-instagram/$vid_part"
+		# 		wget $vid_link -O "$line-$fname.mp4" -q --show-progress
+		# 		fname=`expr $fname + 1`
+		# 		sleep 1
+		# 	fi
 		fi
 	done
 done
