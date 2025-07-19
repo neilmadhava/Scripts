@@ -1,0 +1,1 @@
+python panxapi.py -h 1.1.1.1 -K "api_key" -x -o "<show><vpn><flow/></vpn></show>" | Out-File -FilePath 'vpnflow.xml'

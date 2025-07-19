@@ -1,0 +1,2 @@
+EmpId,FirstName,LastName,DisplayName,LogonName,Email,Manager,Mirror ID,jobTitle,department,country,officeLocation,city,postalCode,telephoneNumber,mobilePhone,Password,OU
+,Test,Acct,Test Acct,Test.Acct,Test.Acct@domain.com,prashanth.s@domain.com,,Software Engineer Trainee,Engineering,IN,,Bangalore,560070,,6290801075,Password,"OU=Users,OU=LAB,OU=Projects,DC=domain,DC=com"
